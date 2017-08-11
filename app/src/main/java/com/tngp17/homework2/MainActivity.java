@@ -7,14 +7,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    private int sum = 0;
+    private TextView tvSign;
+    private TextView tvNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView tvSign = (TextView) findViewById(R.id.tvSign);
-        final TextView tvNumber = (TextView) findViewById(R.id.tvNumber);
+        tvSign = (TextView) findViewById(R.id.tvSign);
+        tvNumber = (TextView) findViewById(R.id.tvNumber);
 
         Button btnOne = (Button) findViewById(R.id.btnOne);
         Button btnThree = (Button) findViewById(R.id.btnThree);
@@ -26,34 +29,11 @@ public class MainActivity extends AppCompatActivity {
         Button btnMinus = (Button) findViewById(R.id.btnMinus);
         Button btnClear = (Button) findViewById(R.id.btnClear);
 
-        btnOne.setOnClickListener(new View.OnClickListener() {
+        btnClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tvNumber.setText("1");
-            }
-        });
-        btnThree.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                tvNumber.setText("3");
-            }
-        });
-        btnFive.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                tvNumber.setText("5");
-            }
-        });
-        btnSeven.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                tvNumber.setText("7");
-            }
-        });
-        btnNine.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                tvNumber.setText("9");
-            }
-        });
-        btnEleven.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                tvNumber.setText("11");
+                tvSign.setText("");
+                tvNumber.setText("");
+                sum = 0;
             }
         });
 
@@ -67,11 +47,60 @@ public class MainActivity extends AppCompatActivity {
                 tvSign.setText("-");
             }
         });
-        btnClear.setOnClickListener(new View.OnClickListener() {
+
+
+        btnOne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tvSign.setText("");
-                tvNumber.setText("");
+                tvNumber.setText(cal(tvSign.getText().toString(), 1));
             }
         });
+        btnThree.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tvNumber.setText(cal(tvSign.getText().toString(), 3));
+            }
+        });
+        btnFive.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tvNumber.setText(cal(tvSign.getText().toString(), 5));
+            }
+        });
+        btnSeven.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tvNumber.setText(cal(tvSign.getText().toString(), 7));
+            }
+        });
+        btnNine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tvNumber.setText(cal(tvSign.getText().toString(), 9));
+            }
+        });
+        btnEleven.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tvNumber.setText(cal(tvSign.getText().toString(), 11));
+            }
+        });
+
+
+    }
+
+    private String cal(String Sign, int num) {
+        if (Sign.equals("+")) {
+            return "" + (sum += num);
+        }
+        if (Sign.equals("-")) {
+            int res = sum - num;
+            if (res <= 0) {
+                sum = 0;
+                tvSign.setText("");
+                return "" + sum;
+            }
+            return "" + (sum -= num);
+        }
+        if (Sign.equals("")) {
+            return "";
+        }
+
+        return "" + sum;
     }
 }
+
