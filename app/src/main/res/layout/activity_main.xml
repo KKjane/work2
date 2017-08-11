@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/relativeLayout"
             android:layout_centerHorizontal="true"
-            android:text="+"
             android:textSize="25sp" />
 
         <TextView
@@ -30,7 +29,6 @@
             android:layout_above="@+id/relativeLayout"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/tvSign"
-            android:text="1000000000"
             android:textSize="25sp" />
     </LinearLayout>
 
